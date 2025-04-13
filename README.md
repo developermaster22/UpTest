@@ -9,7 +9,7 @@ Con este proyecto podrás agregar productos, asignarles características dinámi
 
 ---
 
-<h2 style="color:white">🧰 Tecnologías Utilizadas</h2>
+🧰 Tecnologías Utilizadas
 
 - 🐍 Python 3.10+  
 - 🌐 Django 4.x  
@@ -20,7 +20,7 @@ Con este proyecto podrás agregar productos, asignarles características dinámi
 
 ---
 
-📦 Instalación Paso a Paso</h2>
+📦 Instalación Paso a Paso
 
 > Si quieres correr este proyecto en tu máquina local, sigue estas instrucciones. ¡Es muy fácil!
 
@@ -30,15 +30,15 @@ Con este proyecto podrás agregar productos, asignarles características dinámi
 git clone https://github.com/developermaster22/inventario-django.git
 cd inventario-django
 
-<h3 style="color:white">2. 🐍 Crea un entorno virtual</h3>
+2. 🐍 Crea un entorno virtual
 python -m venv env
 source env/bin/activate  # En Linux/Mac
 env\Scripts\activate     # En Windows
 
-<h3 style="color:white">3. 🧪 Instala las dependencias</h3>
+3. 🧪 Instala las dependencias
 pip install -r requirements.txt
 
-<h3 style="color:white">4. 🐘 Configura tu base de datos PostgreSQL</h3>
+4. 🐘 Configura tu base de datos PostgreSQL
 Crea una base de datos en PostgreSQL y actualiza tu archivo .env (o settings.py) con estos datos:
 DB_NAME=nombre_de_tu_db
 DB_USER=usuario
@@ -79,10 +79,12 @@ docker-compose exec web python manage.py migrate
 ¡Así se ve tu app!
 
 <div align="center">
-  <img src="preview.png" alt="Vista previa de la app" width="600"/>
+  <img src="vista.png" alt="Vista previa de la app" width="600"/>
 </div>
-<div align="center"> <img src="https://media.giphy.com/media/l0MYJzQWqF3TDsVWU/giphy.gif" width="600"/> </div>
 
+<div align="center">
+  <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="600"/>
+</div>
 🙌 Contribuciones
 ¿Quieres mejorar esta app? ¡Eres más que bienvenido!
 Haz un fork, crea tu rama y envía un PR 💪
