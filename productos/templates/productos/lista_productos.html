@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .producto {
+            background: #fff;
+            border-left: 6px solid #28a745;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .producto h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        .caracteristicas {
+            margin-top: 10px;
+            padding-left: 15px;
+        }
+
+        .caracteristicas li {
+            list-style-type: square;
+            color: #555;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .boton-editar {
+            background-color: #007bff;
+        }
+
+        .boton-editar:hover {
+            background-color: #0056b3;
+        }
+
+        .boton-eliminar {
+            background-color: red;
+        }
+
+        .boton-eliminar:hover {
+            background-color: darkred;
+        }
+    </style>
+
+    <script>
+        function confirmarEliminacion(event) {
+            if (!confirm('¿Está seguro de que desea eliminar este producto?')) {
+                event.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h1>Inventario de Productos</h1>
+
+<div style="text-align: center;">
+    <a class="boton-editar" href="{% url 'agregar_producto' %}">+ Agregar nuevo producto</a>
+</div>
+
+{% for producto in productos %}
+    <div class="producto">
+        <h2>{{ producto.nombre }}</h2>
+        <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+        <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+        <p><strong>Disponible:</strong> {% if producto.disponible %}Sí{% else %}No{% endif %}</p>
+
+        {% if producto.caracteristicas.all %}
+            <div class="caracteristicas">
+                <strong>Características:</strong>
+                <ul>
+                    {% for c in producto.caracteristicas.all %}
+                        <li>{{ c.nombre }}: {{ c.valor }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Botones de acción -->
+        <a href="{% url 'editar_productos' producto.id %}" class="boton boton-editar">Editar</a>
+        <form method="post" action="{% url 'eliminar_producto' producto.id %}" style="display:inline;" onsubmit="confirmarEliminacion(event)">
+            {% csrf_token %}
+            <button type="submit" class="boton boton-eliminar">Eliminar</button>
+        </form>
+    </div>
+{% empty %}
+    <p>No hay productos registrados.</p>
+{% endfor %}
+
+</body>
+</html>
