@@ -10,7 +10,7 @@ class ProductoForm(forms.ModelForm):
 CaracteristicasFormSet = inlineformset_factory(
     Producto,
     Caracteristicas,
-    fields=['nombre', 'valor'],
-    extra=2,  #campos vacíos para agregar nuevas características
-    can_delete=True
+    fields=('nombre', 'valor'),
+    extra=2, # Número de formularios adicionales a mostrar
+    can_delete=True  #permitir la eliminación de características
 )

@@ -63,6 +63,30 @@
         .boton-eliminar:hover {
             background-color: darkred;
         }
+
+        .mensaje-toast {
+            text-align: center;
+            background: #ff5722; /* Color llamativo (naranja) */
+            color: white;
+            padding: 15px;
+            margin: 20px auto;
+            font-size: 20px; /* Letras más grandes */
+            font-weight: bold;
+            border-radius: 8px;
+            width: 80%;
+            animation: fadein 0.5s ease, fadeout 0.5s ease 3.5s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeout {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
     </style>
 
     <script>
@@ -71,44 +95,62 @@
                 event.preventDefault();
             }
         }
+
+        // Ocultar el mensaje después de 4 segundos
+        document.addEventListener('DOMContentLoaded', function () {
+            const toast = document.getElementById('mensaje-toast');
+            if (toast) {
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 4000); // 4000 ms = 4 segundos
+            }
+        });
     </script>
 </head>
 <body>
 
-<h1>Inventario de Productos</h1>
+    <h1>Inventario de Productos</h1>
 
-<div style="text-align: center;">
-    <a class="boton-editar" href="{% url 'agregar_producto' %}">+ Agregar nuevo producto</a>
-</div>
-
-{% for producto in productos %}
-    <div class="producto">
-        <h2>{{ producto.nombre }}</h2>
-        <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
-        <p><strong>Precio:</strong> ${{ producto.precio }}</p>
-        <p><strong>Disponible:</strong> {% if producto.disponible %}Sí{% else %}No{% endif %}</p>
-
-        {% if producto.caracteristicas.all %}
-            <div class="caracteristicas">
-                <strong>Características:</strong>
-                <ul>
-                    {% for c in producto.caracteristicas.all %}
-                        <li>{{ c.nombre }}: {{ c.valor }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-
-        <!-- Botones de acción -->
-        <a href="{% url 'editar_productos' producto.id %}" class="boton boton-editar">Editar</a>
-        <form method="post" action="{% url 'eliminar_producto' producto.id %}" style="display:inline;" onsubmit="confirmarEliminacion(event)">
-            {% csrf_token %}
-            <button type="submit" class="boton boton-eliminar">Eliminar</button>
-        </form>
+    {% if messages %}
+        <div class="mensaje-toast" id="mensaje-toast">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a class="boton boton-editar" href="{% url 'agregar_producto' %}">+ Agregar nuevo producto</a>
     </div>
-{% empty %}
-    <p>No hay productos registrados.</p>
-{% endfor %}
+    
+    {% for producto in productos %}
+        <div class="producto">
+            <h2>{{ producto.nombre }}</h2>
+            <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+            <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+            <p><strong>Disponible:</strong> {% if producto.disponible %}Sí{% else %}No{% endif %}</p>
+    
+            {% if producto.caracteristicas.all %}
+                <div class="caracteristicas">
+                    <strong>Características:</strong>
+                    <ul>
+                        {% for c in producto.caracteristicas.all %}
+                            <li>{{ c.nombre }}: {{ c.valor }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+    
+            <!-- Botones de acción -->
+            <a href="{% url 'editar_productos' producto.id %}" class="boton boton-editar">Editar</a>
+            <form method="post" action="{% url 'eliminar_producto' producto.id %}" style="display:inline;" onsubmit="confirmarEliminacion(event)">
+                {% csrf_token %}
+                <button type="submit" class="boton boton-eliminar">Eliminar</button>
+            </form>
+        </div>
+    {% empty %}
+        <p style="text-align: center; font-size: 18px; color: #555;">No hay productos registrados.</p>
+    {% endfor %}
 
 </body>
 </html>

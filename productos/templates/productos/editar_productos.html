@@ -60,8 +60,60 @@
             background-color: #125a9c;
         }
 
+        #agregar-caracteristica {
+            margin-top: 20px;
+            background-color: #ffc107;
+            color: black;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #agregar-caracteristica:hover {
+            background-color: #e0a800;
+        }
+
         hr {
             margin: 1.5rem 0;
+        }
+
+        .mensaje-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ffc107;
+            color: black;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 9999;
+            animation: fadein 0.5s ease;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; right: 0px; }
+            to { opacity: 1; right: 20px; }
+        }
+
+        .boton-flotante {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .boton-flotante:hover {
+            transform: scale(1.1);
+            background-color: #218838;
         }
     </style>
 </head>
@@ -74,44 +126,86 @@
 
             <h3>Características del Producto</h3>
             {{ formset.management_form }}
-            {% for form in formset %}
-                <div class="form-group">
-                    <label for="{{ form.nombre.id_for_label }}">Nombre de la Característica</label>
-                    {{ form.nombre }}
-                </div>
 
-                <div class="form-group">
-                    <label for="{{ form.valor.id_for_label }}">Valor de la Característica</label>
-                    {{ form.valor }}
-                </div>
-                <hr>
-            {% endfor %}
+            <div id="formset-container">
+                {% for form in formset %}
+                    <div class="form-group formset-form">
+                        {{ form.id }}
+
+                        <label for="{{ form.nombre.id_for_label }}">Nombre de la Característica</label>
+                        {{ form.nombre }}
+
+                        <label for="{{ form.valor.id_for_label }}">Valor de la Característica</label>
+                        {{ form.valor }}
+
+                        <label>Eliminar</label>
+                        {{ form.DELETE }}
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
 
             <div style="text-align:center;">
+                <button type="button" id="agregar-caracteristica">+ Agregar característica</button>
+            </div>
+
+            <div style="text-align:center; margin-top: 20px;">
                 <button type="submit">Guardar Cambios</button>
             </div>
         </form>
     </div>
-</body>
-<a href="{% url 'lista_productos' %}" class="boton-flotante">Volver a la lista</a>
 
-<style>
-.boton-flotante {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #28a745;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 30px;
-    text-decoration: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    z-index: 1000;
-}
-.boton-flotante:hover {
-    transform: scale(1.1);
-    background-color: #218838;
-}
-</style>
+    {% if messages %}
+        <div class="mensaje-toast">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <a href="{% url 'lista_productos' %}" class="boton-flotante">Volver a la lista</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnAgregar = document.getElementById('agregar-caracteristica');
+            const formsetContainer = document.getElementById('formset-container');
+            const totalForms = document.getElementById('id_form-TOTAL_FORMS');
+    
+            btnAgregar.addEventListener('click', function () {
+                const currentForms = formsetContainer.querySelectorAll('.formset-form');
+                const formCount = currentForms.length;
+    
+                // Clonar el primer formulario
+                const newForm = currentForms[0].cloneNode(true);
+    
+                // Limpiar los campos
+                newForm.querySelectorAll('input').forEach(function (input) {
+                    if (input.type === 'text' || input.type === 'number') {
+                        input.value = '';
+                    }
+                    const name = input.name.replace(/-\d+-/, `-${formCount}-`);
+                    const id = input.id.replace(/-\d+-/, `-${formCount}-`);
+                    input.name = name;
+                    input.id = id;
+                });
+    
+                // Eliminar campos ocultos de ID si existen
+                const hiddenId = newForm.querySelector('input[type="hidden"][name$="-id"]');
+                if (hiddenId) hiddenId.remove();
+    
+                // Actualizar el nombre del checkbox de eliminación
+                const deleteCheckbox = newForm.querySelector('input[type="checkbox"]');
+                if (deleteCheckbox) {
+                    deleteCheckbox.checked = false;
+                    deleteCheckbox.name = deleteCheckbox.name.replace(/-\d+-/, `-${formCount}-`);
+                    deleteCheckbox.id = deleteCheckbox.id.replace(/-\d+-/, `-${formCount}-`);
+                }
+    
+                formsetContainer.appendChild(newForm);
+                totalForms.value = formCount + 1;
+            });
+        });
+    </script>
+    
+</body>
 </html>
