@@ -23,8 +23,20 @@ Con este proyecto podrás agregar productos, asignarles características dinámi
 📦 Instalación Paso a Paso
 
 > Si quieres correr este proyecto en tu máquina local, sigue estas instrucciones. ¡Es muy fácil!
+> ---
+> 🖼️ Vista previa del proyecto
+¡Así se ve tu app!
 
-1. 🔁 Clona el repositorio</h3>
+<div align="center">
+  <img src="vista.png" alt="Vista previa de la app" width="600"/>
+</div>
+
+<div align="center">
+  <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="600"/>
+</div>
+
+1. 🔁 Clona el repositorio
+
 
 ```bash
 git clone https://github.com/developermaster22/inventario-django.git
@@ -75,16 +87,7 @@ http://localhost:8000
 
 🎯 Usa este comando si necesitas ejecutar migraciones dentro del contenedor:
 docker-compose exec web python manage.py migrate
-🖼️ Vista previa del proyecto
-¡Así se ve tu app!
 
-<div align="center">
-  <img src="vista.png" alt="Vista previa de la app" width="600"/>
-</div>
-
-<div align="center">
-  <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="600"/>
-</div>
 🙌 Contribuciones
 ¿Quieres mejorar esta app? ¡Eres más que bienvenido!
 Haz un fork, crea tu rama y envía un PR 💪
