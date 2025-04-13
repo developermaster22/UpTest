@@ -20,11 +20,11 @@ Con este proyecto podrás agregar productos, asignarles características dinámi
 
 ---
 
-<h2 style="color:white">📦 Instalación Paso a Paso</h2>
+📦 Instalación Paso a Paso</h2>
 
 > Si quieres correr este proyecto en tu máquina local, sigue estas instrucciones. ¡Es muy fácil!
 
-<h3 style="color:white">1. 🔁 Clona el repositorio</h3>
+1. 🔁 Clona el repositorio</h3>
 
 ```bash
 git clone https://github.com/developermaster22/inventario-django.git
@@ -46,18 +46,18 @@ DB_PASSWORD=contraseña
 DB_HOST=localhost
 DB_PORT=5432
 
-<h3 style="color:white">5. 🔧 Realiza las migraciones</h3>
+5. 🔧 Realiza las migraciones
 python manage.py makemigrations
 python manage.py migrate
 
-<h3 style="color:white">6. 👤 Crea un superusuario (opcional)</h3>
+6. 👤 Crea un superusuario (opcional)
 python manage.py createsuperuser
 
-<h3 style="color:white">7. 🚀 Ejecuta el servidor</h3>
+7. 🚀 Ejecuta el servidor
 python manage.py runserver
 Luego entra a 👉 http://127.0.0.1:8000
 
-<h2 style="color:white">💡 Características</h2>
+💡 Características
 ✅ Agregar productos
 ✅ Añadir múltiples características por producto
 ✅ Edición de productos y características
@@ -66,27 +66,30 @@ Luego entra a 👉 http://127.0.0.1:8000
 ✅ Soporte para PostgreSQL
 ✅ Listado de productos con botones y colores llamativos
 
-🐳<h2 style="color:white">🐳 Docker (opcional pero recomendado)</h2> <h3 style="color:white">1. 🐳 Construye y levanta los contenedores</h3>
+🐳 Docker (opcional pero recomendado)
+1. 🐳 Construye y levanta los contenedores</h3>
 docker-compose up --build
 
-<h3 style="color:white">2. 💾 Accede a la app</h3>
+2. 💾 Accede a la app
 http://localhost:8000
 
 🎯 Usa este comando si necesitas ejecutar migraciones dentro del contenedor:
 docker-compose exec web python manage.py migrate
-
-<h2 style="color:white">🖼️ Vista previa del proyecto</h2> <div align="center"> <img
+🖼️ Vista previa del proyecto
 ¡Así se ve tu app!
 
+<div align="center">
+  <img src="preview.png" alt="Vista previa de la app" width="600"/>
+</div>
 <div align="center"> <img src="https://media.giphy.com/media/l0MYJzQWqF3TDsVWU/giphy.gif" width="600"/> </div>
 
-<h2 style="color:white">🙌 Contribuciones</h2>
+🙌 Contribuciones
 ¿Quieres mejorar esta app? ¡Eres más que bienvenido!
 Haz un fork, crea tu rama y envía un PR 💪
 git checkout -b nueva-funcionalidad
 git commit -m "Agrego nueva funcionalidad"
 git push origin nueva-funcionalidad
-<h2 style="color:white">📬 Contacto</h2>
+📬 Contacto
 📧 cesarlinares1522@gmail.com
 🐙 GitHub: @developermaster22
 
