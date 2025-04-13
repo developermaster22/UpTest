@@ -31,6 +31,13 @@ Con este proyecto podrás agregar productos, asignarles características dinámi
   <img src="vista.png" alt="Vista previa de la app" width="600"/>
 </div>
 
+-----------------------------------------------------------------------
+
+
+
+## Con este proyecto, no solo mejorarás tu productividad, sino que también aprenderás a crear soluciones robustas, ¡todo mientras gestionas productos de manera eficiente! 🙌
+
+**¡La innovación comienza aquí!** 💻✨
 <div align="center">
   <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="600"/>
 </div>
