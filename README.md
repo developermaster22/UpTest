@@ -86,7 +86,7 @@ Luego entra a 👉 http://127.0.0.1:8000
 ✅ Listado de productos con botones y colores llamativos
 
 🐳 Docker (opcional pero recomendado)
-1. 🐳 Construye y levanta los contenedores</h3>
+1. 🐳 Construye y levanta los contenedores
 docker-compose up --build
 
 2. 💾 Accede a la app
